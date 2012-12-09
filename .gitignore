@@ -1,0 +1,26 @@
+# IDE working files
+*.iws
+*.ipr
+*.iml
+.idea/
+.settings
+.project
+.classpath
+
+
+# Build files and directories
+lib/*.js
+node_modules
+tmp
+config.json
+npm-debug.log
+
+# Temp files
+*~
+~*
+
+# OS generated files
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
