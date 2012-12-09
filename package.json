@@ -1,0 +1,7 @@
+{
+  "name": "jump-start-coffeescript",
+  "version": "v0.0.1",
+  "devDependencies": {
+    "coffee-script": "latest"
+  }
+}
