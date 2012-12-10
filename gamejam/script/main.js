@@ -4,12 +4,10 @@
 
   gfx = {
     init: function() {
-      var canvasDOM;
-      canvasDOM = document.getElementById("game");
-      if (canvasDOM !== null) {
-        this.ctx = canvasDOM.getContext("2d");
-      }
-      return this.ctx !== null;
+      var canvas;
+      canvas = document.querySelector("#game");
+      this.ctx = canvas != null ? typeof canvas.getContext === "function" ? canvas.getContext("2d") : void 0 : void 0;
+      return this.ctx != null;
     }
   };
 
