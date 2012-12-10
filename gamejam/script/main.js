@@ -7,7 +7,12 @@
       var canvas;
       canvas = document.querySelector("#game");
       this.ctx = canvas != null ? typeof canvas.getContext === "function" ? canvas.getContext("2d") : void 0 : void 0;
-      return this.ctx != null;
+      if (!this.ctx) {
+        return false;
+      }
+      this.w = canvas.width;
+      this.h = canvas.height;
+      return true;
     }
   };
 
