@@ -6,3 +6,5 @@ gfx =
     @w = canvas.width
     @h = canvas.height
     true
+  clear: ->
+    @ctx.clearRect 0, 0, @w, @h
