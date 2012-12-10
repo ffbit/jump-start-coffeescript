@@ -1,5 +1,5 @@
 gfx =
   init: ->
-    canvas = document.querySelector "#game"
+    canvas = canvas ? document.querySelector "#game"
     @ctx = canvas?.getContext? "2d"
     @ctx?
