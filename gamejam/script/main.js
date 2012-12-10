@@ -6,7 +6,10 @@
     init: function() {
       var canvasDOM;
       canvasDOM = document.getElementById("game");
-      return this.ctx = canvasDOM.getContext("2d");
+      if (canvasDOM !== null) {
+        this.ctx = canvasDOM.getContext("2d");
+      }
+      return this.ctx !== null;
     }
   };
 
