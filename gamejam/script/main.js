@@ -12,6 +12,7 @@
       }
       this.w = canvas.width;
       this.h = canvas.height;
+      this.tileSize = 24;
       return true;
     },
     clear: function() {
@@ -23,6 +24,9 @@
       return this.sprites.onload = function() {
         return onload();
       };
+    },
+    drawSprite: function(col, row, x, y) {
+      return this.ctx.drawImage(this.sprites, col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize, x, y, this.tileSize, this.tileSize);
     }
   };
 
@@ -36,7 +40,7 @@
       return gfx.load(function() {
         var c;
         c = gfx.ctx;
-        return c.drawImage(gfx.sprites, 10, 20);
+        return gfx.drawSprite(0, 0, 100, 50);
       });
     }
   };

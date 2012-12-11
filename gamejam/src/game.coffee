@@ -8,7 +8,7 @@ game =
     gfx.clear()
     gfx.load ->
       c = gfx.ctx
-      c.drawImage gfx.sprites, 10, 20
+      gfx.drawSprite 0, 0, 100, 50
 
 # Start the game running
 game.init()
