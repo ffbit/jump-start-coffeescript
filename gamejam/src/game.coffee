@@ -9,3 +9,10 @@ game =
 
 # Start the game running
 game.init()
+
+fillAndStrokeARectangle = ->
+  c = gfx.ctx
+  c.fillStyle = "orange"
+  c.fillRect 10, 10, 300, 80
+
+fillAndStrokeARectangle()
