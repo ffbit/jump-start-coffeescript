@@ -38,9 +38,25 @@
       }
       gfx.clear();
       return gfx.load(function() {
-        var c;
+        var c, col, rand, row, x, y, _i, _results;
         c = gfx.ctx;
-        return gfx.drawSprite(0, 0, 100, 50);
+        rand = function(max) {
+          return Math.floor(Math.random() * max);
+        };
+        _results = [];
+        for (y = _i = 0; _i <= 19; y = ++_i) {
+          _results.push((function() {
+            var _j, _results1;
+            _results1 = [];
+            for (x = _j = 0; _j <= 23; x = ++_j) {
+              col = rand(7);
+              row = rand(2);
+              _results1.push(gfx.drawSprite(col, row, x * gfx.tileSize, y * gfx.tileSize));
+            }
+            return _results1;
+          })());
+        }
+        return _results;
       });
     }
   };
