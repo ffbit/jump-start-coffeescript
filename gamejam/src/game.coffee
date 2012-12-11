@@ -10,8 +10,8 @@ game =
       c = gfx.ctx
       rand = (max) ->
         Math.floor Math.random() * max
-      for y in [0..19]
-        for x in [0..23]
+      for y in [0...20]
+        for x in [0...24]
           col = rand 7
           row = rand 2
           gfx.drawSprite col, row,

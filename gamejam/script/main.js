@@ -44,11 +44,11 @@
           return Math.floor(Math.random() * max);
         };
         _results = [];
-        for (y = _i = 0; _i <= 19; y = ++_i) {
+        for (y = _i = 0; _i < 20; y = ++_i) {
           _results.push((function() {
             var _j, _results1;
             _results1 = [];
-            for (x = _j = 0; _j <= 23; x = ++_j) {
+            for (x = _j = 0; _j < 24; x = ++_j) {
               col = rand(7);
               row = rand(2);
               _results1.push(gfx.drawSprite(col, row, x * gfx.tileSize, y * gfx.tileSize));
