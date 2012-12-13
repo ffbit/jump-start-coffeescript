@@ -24,3 +24,11 @@ game =
 
 # Start the game running
 game.init()
+
+# Some CoffeeScript examples
+people = ["Smith", "Jones", "Castledine-Carlin"]
+longNames = for name in people \
+              when name.length > 10
+                "Validation error for person: #{name}"
+
+alert longNames.join("\n")
