@@ -19,3 +19,13 @@ game =
 
 # Start the game running
 game.init()
+
+# Some CoffeeScript examples
+square = (x) -> x * x
+
+distance = (x1, y1, x2, y2) ->
+  Math.sqrt square(x1 - x2) + square(y1 - y2)
+
+test = -> alert distance(2, 3, 5, 5)
+
+test()
