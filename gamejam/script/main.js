@@ -50,7 +50,7 @@
       }
       gfx.clear();
       return gfx.load(function() {
-        var c, drawANinja, leftNinjas, makeANinja, n, ninjas, rand, _i, _len, _results;
+        var c, drawANinja, makeANinja, n, ninjas, rand, _i, _len, _ref, _results;
         c = gfx.ctx;
         rand = function(max) {
           return Math.floor(Math.random() * max);
@@ -73,20 +73,20 @@
           }
           return _results;
         })();
-        leftNinjas = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = ninjas.length; _i < _len; _i++) {
-            n = ninjas[_i];
+        _ref = (function() {
+          var _j, _len, _results1;
+          _results1 = [];
+          for (_j = 0, _len = ninjas.length; _j < _len; _j++) {
+            n = ninjas[_j];
             if (n.x < gfx.w / 2) {
-              _results.push(n);
+              _results1.push(n);
             }
           }
-          return _results;
+          return _results1;
         })();
         _results = [];
-        for (_i = 0, _len = leftNinjas.length; _i < _len; _i++) {
-          n = leftNinjas[_i];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          n = _ref[_i];
           _results.push(drawANinja(n));
         }
         return _results;

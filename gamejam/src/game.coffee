@@ -19,9 +19,8 @@ game =
 
       ninjas = (makeANinja() for [0...20])
 
-      leftNinjas = (n for n in ninjas when n.x < gfx.w / 2)
-
-      drawANinja n for n in leftNinjas
+      drawANinja n for n in \
+        (n for n in ninjas when n.x < gfx.w / 2)
 
 # Start the game running
 game.init()
