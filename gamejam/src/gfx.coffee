@@ -1,11 +1,12 @@
 gfx =
+  tileW: 24
+  tileH: 24
   init: ->
     canvas = document.querySelector "#game"
     @ctx = canvas?.getContext? "2d"
     return false unless @ctx
     @w = canvas.width
     @h = canvas.height
-    @tileSize = 24
     true
   clear: ->
     @ctx.clearRect 0, 0, @w, @h
@@ -16,7 +17,9 @@ gfx =
       onload()
   drawSprite: (col, row, x, y) ->
     @ctx.drawImage @sprites,
-                   col * @tileSize, row * @tileSize,
-                   @tileSize, @tileSize,
+                   col * @tileW, row * @tileH,
+                   @tileW, @tileH,
                    x, y,
-                   @tileSize, @tileSize
+                   @tileW, @tileH
+  drawSpriteFancy: (col, row, x, y, w, h, scale) ->
+

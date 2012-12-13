@@ -3,6 +3,8 @@
   var distance, game, gfx, square, test;
 
   gfx = {
+    tileW: 24,
+    tileH: 24,
     init: function() {
       var canvas;
       canvas = document.querySelector("#game");
@@ -12,7 +14,6 @@
       }
       this.w = canvas.width;
       this.h = canvas.height;
-      this.tileSize = 24;
       return true;
     },
     clear: function() {
@@ -26,8 +27,9 @@
       };
     },
     drawSprite: function(col, row, x, y) {
-      return this.ctx.drawImage(this.sprites, col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize, x, y, this.tileSize, this.tileSize);
-    }
+      return this.ctx.drawImage(this.sprites, col * this.tileW, row * this.tileH, this.tileW, this.tileH, x, y, this.tileW, this.tileH);
+    },
+    drawSpriteFancy: function(col, row, x, y, w, h, scale) {}
   };
 
   game = {
@@ -51,7 +53,7 @@
             for (x = _j = 0; _j < 24; x = ++_j) {
               col = rand(7);
               row = rand(2);
-              _results1.push(gfx.drawSprite(col, row, x * gfx.tileSize, y * gfx.tileSize));
+              _results1.push(gfx.drawSprite(col, row, x * gfx.tileW, y * gfx.tileH));
             }
             return _results1;
           })());

@@ -15,7 +15,7 @@ game =
           col = rand 7
           row = rand 2
           gfx.drawSprite col, row,
-                         x * gfx.tileSize, y * gfx.tileSize
+                         x * gfx.tileW, y * gfx.tileH
 
 # Start the game running
 game.init()
