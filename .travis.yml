@@ -5,4 +5,4 @@ node_js:
 
 before_script:
   - coffee --compile -o lib src
-  - coffee -j gamejam/script/main.js -c gamejam/src/gfx.coffee gamejam/src/game.coffee
+  - coffee -j gamejam/script/main.js -c gamejam/src/gfx.coffee gamejam/src/keys.coffee gamejam/src/player.coffee gamejam/src/game.coffee
