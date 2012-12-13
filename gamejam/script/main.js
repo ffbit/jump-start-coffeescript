@@ -50,13 +50,35 @@
       }
       gfx.clear();
       return gfx.load(function() {
-        var c, rand;
+        var c, drawANinja, makeANinja, n, ninjas, rand, _i, _len, _results;
         c = gfx.ctx;
         rand = function(max) {
           return Math.floor(Math.random() * max);
         };
         gfx.drawSprite(0, 0, 50, 50);
-        return gfx.drawSprite(0, 0, 74, 50, 1, 1, 2);
+        makeANinja = function() {
+          return {
+            x: rand(gfx.w),
+            y: rand(gfx.h)
+          };
+        };
+        drawANinja = function(n) {
+          return gfx.drawSprite(0, 1, n.x, n.y);
+        };
+        ninjas = (function() {
+          var _i, _results;
+          _results = [];
+          for (_i = 0; _i < 20; _i++) {
+            _results.push(makeANinja());
+          }
+          return _results;
+        })();
+        _results = [];
+        for (_i = 0, _len = ninjas.length; _i < _len; _i++) {
+          n = ninjas[_i];
+          _results.push(drawANinja(n));
+        }
+        return _results;
       });
     }
   };
