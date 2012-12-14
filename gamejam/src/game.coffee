@@ -42,14 +42,24 @@ game =
 
       # Create a map from the ASCII
       level = makeLevel level1
-      # Draw the level
-      for row, y in level
-        for tile, x in row
-          continue unless tile
-          xPos = x * gfx.tileW
-          yPos = y * gfx.tileH
-          gfx.drawSprite tile[0], tile[1],
-                         xPos, yPos
+
+      setInterval ->
+        # run the things
+        player.update()
+
+        gfx.clear()
+
+        # Draw the level
+        for row, y in level
+          for tile, x in row
+            continue unless tile
+            xPos = x * gfx.tileW
+            yPos = y * gfx.tileH
+            gfx.drawSprite tile[0], tile[1],
+                           xPos, yPos
+
+        player.render gfx
+      , 33
 
 # Start the game running
 game.init()
