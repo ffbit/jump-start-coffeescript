@@ -50,8 +50,33 @@ keys = {
   reset: function() {
     return this.up = this.down = this.left = this.right = this.space = false;
   },
-  trigger: function(keyCode, isDown) {}
+  trigger: function(keyCode, isDown) {
+    switch (keyCode) {
+      case 37:
+        this.left = isDown;
+        break;
+      case 39:
+        this.right = isDown;
+        break;
+      case 38:
+        this.up = isDown;
+        break;
+      case 40:
+        this.down = isDown;
+    }
+    if (isDown) {
+      return console.log(keyCode);
+    }
+  }
 };
+
+document.addEventListener("keydown", function(e) {
+  return keys.trigger(e.keyCode, true);
+}, false);
+
+document.addEventListener("keyup", function(e) {
+  return keys.trigger(e.keyCode, false);
+}, false);
 
 game = {
   init: function() {

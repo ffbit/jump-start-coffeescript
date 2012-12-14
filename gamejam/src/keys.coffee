@@ -10,4 +10,18 @@ keys =
 
   trigger: (keyCode, isDown) ->
     # Handle the key event
+    switch keyCode
+      when 37 then @left  = isDown
+      when 39 then @right = isDown
+      when 38 then @up    = isDown
+      when 40 then @down  = isDown
 
+    console.log keyCode if isDown
+
+document.addEventListener "keydown", (e) ->
+  keys.trigger e.keyCode, true
+, false
+
+document.addEventListener "keyup", (e) ->
+  keys.trigger e.keyCode, false
+, false
