@@ -1,0 +1,4 @@
+task 'greet', 'Say hello to everyone', ->
+  console.log 'Hello, World!'
+
+# Learn more about the cake utility program and Cakefile file.
