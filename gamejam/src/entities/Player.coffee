@@ -1,7 +1,4 @@
-class Player
-  constructor: (@x, @y) ->
-    # runs when instantiated
-  speed: 4
+class Player extends Entity
   update: ->
     @x -= @speed if keys.left
     @x += @speed if keys.right
@@ -9,6 +6,3 @@ class Player
     @y += @speed if keys.down
   render: (gfx) ->
     gfx.drawSprite 0, 0, @x, @y
-
-professor = new Player 10, 20
-console.log professor.x, professor.y
