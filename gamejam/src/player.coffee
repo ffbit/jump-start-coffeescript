@@ -9,3 +9,6 @@ class Player
     @y += @speed if keys.down
   render: (gfx) ->
     gfx.drawSprite 0, 0, @x, @y
+
+professor = new Player 10, 20
+console.log professor.x, professor.y
