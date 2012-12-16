@@ -109,11 +109,39 @@ player = {
 
 game = {
   running: false,
-  init: function() {},
-  stop: function() {},
-  start: function() {},
-  reset: function() {},
-  tick: function() {},
+  init: function() {
+    if (!gfx.init()) {
+      alert("Sorry, no canvas");
+      return;
+    }
+    return gfx.load(function() {
+      return game.reset();
+    });
+  },
+  stop: function() {
+    return this.running = false;
+  },
+  start: function() {
+    return this.running = true;
+  },
+  reset: function() {
+    keys.reset();
+    if (!this.running) {
+      this.start();
+      return this.tick();
+    }
+  },
+  tick: function() {
+    if (!this.running) {
+      return;
+    }
+    gfx.clear();
+    this.update();
+    this.render();
+    return setTimeout((function() {
+      return game.tick();
+    }), 33);
+  },
   update: function() {},
   render: function() {}
 };
