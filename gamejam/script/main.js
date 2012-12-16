@@ -138,9 +138,9 @@ game = {
     gfx.clear();
     this.update();
     this.render();
-    return setTimeout((function() {
+    return requestAnimationFrame(function() {
       return game.tick();
-    }), 33);
+    });
   },
   update: function() {},
   render: function() {}

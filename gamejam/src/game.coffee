@@ -20,6 +20,7 @@ game =
     gfx.clear()
     @update()
     @render()
-    setTimeout (-> game.tick()), 33
+    requestAnimationFrame ->
+      game.tick()
   update: ->
   render: ->
