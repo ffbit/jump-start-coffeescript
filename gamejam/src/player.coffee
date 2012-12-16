@@ -1,8 +1,6 @@
 class Player
-  constructor: (x, y) ->
+  constructor: (@x, @y) ->
     # runs when instantiated
-    @x = x
-    @y = y
   speed: 4
   update: ->
     @x -= @speed if keys.left
