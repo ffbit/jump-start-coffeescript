@@ -1,4 +1,8 @@
 class Player
+  constructor: (x, y) ->
+    # runs when instantiated
+    @x = x
+    @y = y
   speed: 4
   update: ->
     @x -= @speed if keys.left
@@ -7,6 +11,3 @@ class Player
     @y += @speed if keys.down
   render: (gfx) ->
     gfx.drawSprite 0, 0, @x, @y
-
-player1 = new Player()
-player2 = new Player()
