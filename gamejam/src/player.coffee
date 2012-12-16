@@ -1,6 +1,4 @@
-player =
-  x: gfx.tileW * 3
-  y: gfx.tileH * 5
+class Player
   speed: 4
   update: ->
     @x -= @speed if keys.left
@@ -9,3 +7,6 @@ player =
     @y += @speed if keys.down
   render: (gfx) ->
     gfx.drawSprite 0, 0, @x, @y
+
+player1 = new Player()
+player2 = new Player()
