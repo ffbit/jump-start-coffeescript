@@ -190,5 +190,11 @@ game = {
     }), 33);
   },
   update: function() {},
-  render: function() {}
+  render: function() {
+    var ninja, player;
+    player = new Player(50, 50);
+    ninja = new Ninja(80, 50);
+    player.render(gfx);
+    return ninja.render(gfx);
+  }
 };

@@ -23,3 +23,8 @@ game =
     setTimeout (-> game.tick()), 33
   update: ->
   render: ->
+    player = new Player 50, 50
+    ninja = new Ninja 80, 50
+
+    player.render gfx
+    ninja.render gfx
