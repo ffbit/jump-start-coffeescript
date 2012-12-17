@@ -175,7 +175,40 @@ Level = (function() {
     alert("Ninja 1 at: " + ninja.x + ", " + ninja.y);
   }
 
-  Level.prototype.load = function(level) {};
+  Level.prototype.load = function(level) {
+    var asciiMap, col, row, x;
+    this.ninjas = [];
+    this.treasures = 0;
+    asciiMap = (function() {
+      var _i, _len, _ref, _results;
+      _ref = level.data.split("\n");
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        row = _ref[_i];
+        _results.push(row.split(""));
+      }
+      return _results;
+    })();
+    return this.map = (function() {
+      var _i, _len, _results;
+      _results = [];
+      for (x = _i = 0, _len = row.length; _i < _len; x = ++_i) {
+        col = row[x];
+        switch (col) {
+          case "@":
+            _results.push(new Dirt());
+            break;
+          case "X":
+            this.addNinja(x, y);
+            _results.push(new Block());
+            break;
+          default:
+            _results.push(new Block());
+        }
+      }
+      return _results;
+    }).call(this);
+  };
 
   Level.prototype.addNinja = function(x, y) {
     var ninja, xPos, yPos;
