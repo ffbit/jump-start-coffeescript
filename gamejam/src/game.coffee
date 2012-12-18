@@ -29,17 +29,6 @@ game =
   render: ->
     @level.render gfx
     @player.render gfx
-    # player = new Player null, 50, 50
-    # ninja = new Ninja null, 80, 50
-
-    # player.render gfx
-    # ninja.render gfx
-
-    # d = new Dirt()
-    # d.render gfx, 10, 10
-
-    # myLevel = new Level levels[0], @
-    # myLevel.render(gfx)
   setPlayer: (x, y, level) ->
     @player.level = level
     @player.x = x
