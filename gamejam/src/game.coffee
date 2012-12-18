@@ -31,3 +31,5 @@ game =
 
     d = new Dirt()
     d.render gfx, 10, 10
+
+myLevel = new Level levels[0]

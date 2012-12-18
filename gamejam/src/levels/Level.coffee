@@ -27,6 +27,8 @@ class Level
         else new Block()
 
     # 4. Set the level height and width
+    @h = @map.length
+    @w = @map[0].length
   addNinja: (x, y) ->
     xPos = x * gfx.tileW
     yPos = y * gfx.tileH
