@@ -211,11 +211,17 @@ Treasure = (function(_super) {
   __extends(Treasure, _super);
 
   function Treasure() {
-    return Treasure.__super__.constructor.apply(this, arguments);
+    this.yOff = Math.random() * Math.PI;
   }
 
+  Treasure.prototype.update = function() {
+    return this.yOff += Math.PI / 24;
+  };
+
   Treasure.prototype.render = function(gfx, x, y) {
-    return gfx.drawSprite(5, 1, x, y);
+    var ySine;
+    ySine = Math.floor(Math.sin(this.yOff) * 4);
+    return gfx.drawSprite(5, 1, x, y + ySine);
   };
 
   return Treasure;
