@@ -28,6 +28,8 @@ class Level
     # 4. Set the level height and width
     @h = @map.length
     @w = @map[0].length
+  addPlayer: (x, y) ->
+    @game.setPlayer x * gfx.tileW, y * gfx.tileH, @
   addNinja: (x, y) ->
     xPos = x * gfx.tileW
     yPos = y * gfx.tileH
@@ -47,5 +49,3 @@ class Level
         block.render gfx, x * gfx.tileW, y * gfx.tileH
 
     ninja.render gfx for ninja in @ninjas
-  addPlayer: (x, y) ->
-    # @game.setPlayer x * gfx.tileW, y * gfx.tileH, @

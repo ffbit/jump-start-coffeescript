@@ -11,6 +11,8 @@ game =
   start: ->
     @running = true
   reset: ->
+    @player = new Player
+    @level = new Level levels[0], @
     keys.reset()
     unless @running
       @start()
@@ -22,7 +24,11 @@ game =
     @render()
     setTimeout (-> game.tick()), 33
   update: ->
+    @level.update()
+    @player.update()
   render: ->
+    @level.render gfx
+    @player.render gfx
     # player = new Player null, 50, 50
     # ninja = new Ninja null, 80, 50
 
@@ -32,8 +38,8 @@ game =
     # d = new Dirt()
     # d.render gfx, 10, 10
 
-    myLevel = new Level levels[0]
-    myLevel.render(gfx)
+    # myLevel = new Level levels[0], @
+    # myLevel.render(gfx)
   setPlayer: (x, y, level) ->
     @player.level = level
     @player.x = x

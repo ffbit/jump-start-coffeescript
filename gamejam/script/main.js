@@ -252,6 +252,10 @@ Level = (function() {
     return this.w = this.map[0].length;
   };
 
+  Level.prototype.addPlayer = function(x, y) {
+    return this.game.setPlayer(x * gfx.tileW, y * gfx.tileH, this);
+  };
+
   Level.prototype.addNinja = function(x, y) {
     var ninja, xPos, yPos;
     xPos = x * gfx.tileW;
@@ -298,8 +302,6 @@ Level = (function() {
     return _results;
   };
 
-  Level.prototype.addPlayer = function(x, y) {};
-
   return Level;
 
 })();
@@ -329,6 +331,8 @@ game = {
     return this.running = true;
   },
   reset: function() {
+    this.player = new Player;
+    this.level = new Level(levels[0], this);
     keys.reset();
     if (!this.running) {
       this.start();
@@ -346,11 +350,13 @@ game = {
       return game.tick();
     }), 33);
   },
-  update: function() {},
+  update: function() {
+    this.level.update();
+    return this.player.update();
+  },
   render: function() {
-    var myLevel;
-    myLevel = new Level(levels[0]);
-    return myLevel.render(gfx);
+    this.level.render(gfx);
+    return this.player.render(gfx);
   },
   setPlayer: function(x, y, level) {
     this.player.level = level;
