@@ -33,4 +33,8 @@ game =
     # d.render gfx, 10, 10
 
     myLevel = new Level levels[0]
-    myLevel.render()
+    myLevel.render(gfx)
+  setPlayer: (x, y, level) ->
+    @player.level = level
+    @player.x = x
+    @player.y = y

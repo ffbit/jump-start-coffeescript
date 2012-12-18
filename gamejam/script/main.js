@@ -156,6 +156,38 @@ Player = (function(_super) {
 
 })(Entity);
 
+Block = (function() {
+
+  Block.prototype.solid = false;
+
+  function Block() {}
+
+  Block.prototype.update = function() {};
+
+  Block.prototype.render = function(gfx, x, y) {};
+
+  return Block;
+
+})();
+
+Dirt = (function(_super) {
+
+  __extends(Dirt, _super);
+
+  function Dirt() {
+    return Dirt.__super__.constructor.apply(this, arguments);
+  }
+
+  Dirt.prototype.solid = true;
+
+  Dirt.prototype.render = function(gfx, x, y) {
+    return gfx.drawSprite(4, 1, x, y);
+  };
+
+  return Dirt;
+
+})(Block);
+
 Level = (function() {
 
   Level.prototype.w = 0;
@@ -167,16 +199,12 @@ Level = (function() {
   Level.prototype.ninjas = [];
 
   function Level(level, game) {
-    var ninja;
     this.game = game;
     this.load(level);
-    this.addNinja(1, 1);
-    ninja = this.ninjas[0];
-    console.log("Ninja 1 at: " + ninja.x + ", " + ninja.y);
   }
 
   Level.prototype.load = function(level) {
-    var asciiMap, col, row, x;
+    var asciiMap, col, row, x, y;
     this.ninjas = [];
     this.treasures = 0;
     asciiMap = (function() {
@@ -192,19 +220,31 @@ Level = (function() {
     this.map = (function() {
       var _i, _len, _results;
       _results = [];
-      for (x = _i = 0, _len = row.length; _i < _len; x = ++_i) {
-        col = row[x];
-        switch (col) {
-          case "@":
-            _results.push(new Dirt());
-            break;
-          case "X":
-            this.addNinja(x, y);
-            _results.push(new Block());
-            break;
-          default:
-            _results.push(new Block());
-        }
+      for (y = _i = 0, _len = asciiMap.length; _i < _len; y = ++_i) {
+        row = asciiMap[y];
+        _results.push((function() {
+          var _j, _len1, _results1;
+          _results1 = [];
+          for (x = _j = 0, _len1 = row.length; _j < _len1; x = ++_j) {
+            col = row[x];
+            switch (col) {
+              case "@":
+                _results1.push(new Dirt());
+                break;
+              case "X":
+                this.addNinja(x, y);
+                _results1.push(new Block());
+                break;
+              case "P":
+                this.addPlayer(x, y);
+                _results1.push(new Block());
+                break;
+              default:
+                _results1.push(new Block());
+            }
+          }
+          return _results1;
+        }).call(this));
       }
       return _results;
     }).call(this);
@@ -258,6 +298,8 @@ Level = (function() {
     return _results;
   };
 
+  Level.prototype.addPlayer = function(x, y) {};
+
   return Level;
 
 })();
@@ -268,38 +310,6 @@ levels = [
     data: ".P................X.....\n@-@@.........@@@@@@@-@..\n.#..@@@.............#...\n.#.....@@.@@.....X..#...\n@OO#.........#@@...O#..^\n...#.........#......#.^O\n...#..@@-@@@@#..-@@@@@OO\n...#....#....#..#.......\n...#....#....#..#.......\n...#....#....#..#.......\n@-@@OOOOO.#.@@@@@#@@-@@@\n.#.X......#......#..#...\n.#...*....#......#..#...\n####..@@#@@..-@@@@@@@..*\n####....#....#.........#\n####....#....#.........#\nOOOOOOOOOOOOOOOOOOOOOOOO"
   }
 ];
-
-Block = (function() {
-
-  Block.prototype.solid = false;
-
-  function Block() {}
-
-  Block.prototype.update = function() {};
-
-  Block.prototype.render = function(gfx, x, y) {};
-
-  return Block;
-
-})();
-
-Dirt = (function(_super) {
-
-  __extends(Dirt, _super);
-
-  function Dirt() {
-    return Dirt.__super__.constructor.apply(this, arguments);
-  }
-
-  Dirt.prototype.solid = true;
-
-  Dirt.prototype.render = function(gfx, x, y) {
-    return gfx.drawSprite(4, 1, x, y);
-  };
-
-  return Dirt;
-
-})(Block);
 
 game = {
   running: false,
@@ -340,6 +350,11 @@ game = {
   render: function() {
     var myLevel;
     myLevel = new Level(levels[0]);
-    return myLevel.render();
+    return myLevel.render(gfx);
+  },
+  setPlayer: function(x, y, level) {
+    this.player.level = level;
+    this.player.x = x;
+    return this.player.y = y;
   }
 };

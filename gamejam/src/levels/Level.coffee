@@ -5,11 +5,6 @@ class Level
   ninjas: []
   constructor: (level, @game) ->
     @load level
-
-    # 
-    @addNinja 1, 1
-    ninja = @ninjas[0]
-    console.log  "Ninja 1 at: #{ninja.x}, #{ninja.y}"
   load: (level) ->
     # 1. Clear level items
     @ninjas = []
@@ -18,13 +13,17 @@ class Level
     asciiMap = (row.split "" \
       for row in level.data.split "\n")
     # 3. Loop over the map and create the blocks
-    @map = for col, x in row
-      switch col
-        when "@" then new Dirt()
-        when "X"
-          @addNinja x, y
-          new Block()
-        else new Block()
+    @map = for row, y in asciiMap
+             for col, x in row
+               switch col
+                 when "@" then new Dirt()
+                 when "X"
+                   @addNinja x, y
+                   new Block()
+                 when "P"
+                   @addPlayer x, y
+                   new Block()
+                 else new Block()
 
     # 4. Set the level height and width
     @h = @map.length
@@ -48,3 +47,5 @@ class Level
         block.render gfx, x * gfx.tileW, y * gfx.tileH
 
     ninja.render gfx for ninja in @ninjas
+  addPlayer: (x, y) ->
+    # @game.setPlayer x * gfx.tileW, y * gfx.tileH, @
