@@ -18,6 +18,9 @@ class Level
                switch col
                  when "@" then new Dirt()
                  when "O" then new Rock()
+                 when "*"
+                   @treasures++
+                   new Treasure()
                  when "X"
                    @addNinja x, y
                    new Block()
