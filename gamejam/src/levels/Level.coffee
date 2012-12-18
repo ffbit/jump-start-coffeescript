@@ -9,7 +9,7 @@ class Level
     # 
     @addNinja 1, 1
     ninja = @ninjas[0]
-    alert "Ninja 1 at: #{ninja.x}, #{ninja.y}"
+    console.log  "Ninja 1 at: #{ninja.x}, #{ninja.y}"
   load: (level) ->
     # 1. Clear level items
     @ninjas = []
@@ -42,3 +42,9 @@ class Level
 
     ninja.update() for ninja in @ninjas
   render: (gfx) ->
+    # Render the level block
+    for row, y in @map
+      for block, x in row
+        block.render gfx, x * gfx.tileW, y * gfx.tileH
+
+    ninja.render gfx for ninja in @ninjas
