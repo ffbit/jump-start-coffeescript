@@ -17,6 +17,7 @@ class Level
              for col, x in row
                switch col
                  when "@" then new Dirt()
+                 when "O" then new Rock()
                  when "X"
                    @addNinja x, y
                    new Block()
