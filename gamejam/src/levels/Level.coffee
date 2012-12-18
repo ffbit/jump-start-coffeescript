@@ -35,4 +35,10 @@ class Level
     ninja = new Ninja @, xPos, yPos
     @ninjas.push ninja
   update: ->
+    # Update the level blocks
+    for row in @map
+      for block in row
+        block.update()
+
+    ninja.update() for ninja in @ninjas
   render: (gfx) ->
