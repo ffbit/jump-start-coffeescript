@@ -28,6 +28,12 @@ class Entity
     if y > 0 and (bl.solid or br.solid)
       yo = @level.getBlockEdge(@y + (@h - 1), "VERT") - @y - @h
     # 4. Check possible block collisions due to horizontal movement
+    [tl, bl, tr, br] = level.getBlocks [
+                          [xv, @y],
+                          [xv, @y + (@h -1)],
+                          [xv + (@w - 1), @y],
+                          [xv + (@w - 1), @y + (@h - 1)]
+                        ]
     # 5. If edges overlap, move entity back a little
     # 6. Finally, add the allowed movement to the current position
 

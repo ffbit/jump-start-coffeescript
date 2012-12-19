@@ -133,7 +133,7 @@ Entity = (function() {
   };
 
   Entity.prototype.move = function(dx, dy) {
-    var bl, br, tl, tr, xo, xv, yo, yv, _ref;
+    var bl, br, tl, tr, xo, xv, yo, yv, _ref, _ref1;
     xo = dx;
     yo = dy;
     xv = this.x + xo;
@@ -143,8 +143,9 @@ Entity = (function() {
       yo = this.level.getBlockEdge(this.y, "VERT") - this.y;
     }
     if (y > 0 && (bl.solid || br.solid)) {
-      return yo = this.level.getBlockEdge(this.y + (this.h - 1), "VERT") - this.y - this.h;
+      yo = this.level.getBlockEdge(this.y + (this.h - 1), "VERT") - this.y - this.h;
     }
+    return _ref1 = level.getBlocks([[xv, this.y], [xv, this.y + (this.h(-1))], [xv + (this.w - 1), this.y], [xv + (this.w - 1), this.y + (this.h - 1)]]), tl = _ref1[0], bl = _ref1[1], tr = _ref1[2], br = _ref1[3], _ref1;
   };
 
   return Entity;
