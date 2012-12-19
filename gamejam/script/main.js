@@ -132,6 +132,14 @@ Entity = (function() {
     return gfx.ctx.fillText("?", this.x, this.y);
   };
 
+  Entity.prototype.move = function(dx, dy) {
+    var xo, xv, yo, yv;
+    xo = dx;
+    yo = dy;
+    xv = this.x + xo;
+    return yv = this.y + yo;
+  };
+
   return Entity;
 
 })();
