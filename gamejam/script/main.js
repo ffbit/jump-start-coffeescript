@@ -138,7 +138,13 @@ Entity = (function() {
     yo = dy;
     xv = this.x + xo;
     yv = this.y + yo;
-    return _ref = level.getBlocks([[this.x, yv], [this.x, yv + (this.h - 1)], [this.x + (this.w - 1), yv], [this.x + (this.w - 1), yv + (this.h - 1)]]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3], _ref;
+    _ref = level.getBlocks([[this.x, yv], [this.x, yv + (this.h - 1)], [this.x + (this.w - 1), yv], [this.x + (this.w - 1), yv + (this.h - 1)]]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3];
+    if (y < 0 && (tl.solid in tr.solid)) {
+      yo = this.level.getBlockEdge(this.y, "VERT") - this.y;
+    }
+    if (y > 0 && (bl.solid || br.solid)) {
+      return yo = this.level.getBlockEdge(this.y + (this.h - 1), "VERT") - this.y - this.h;
+    }
   };
 
   return Entity;
