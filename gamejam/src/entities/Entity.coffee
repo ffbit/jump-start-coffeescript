@@ -40,4 +40,5 @@ class Entity
     if dx > 0 and (tr.solid or br.solid)
       xo = @level.getBlockEdge(xv + (@w - 1)) - @x - @w
     # 6. Finally, add the allowed movement to the current position
-
+    @x += xo
+    @y += yo

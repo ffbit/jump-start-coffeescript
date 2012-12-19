@@ -150,8 +150,10 @@ Entity = (function() {
       xo = this.level.getBlockEdge(this.x) - this.x;
     }
     if (dx > 0 && (tr.solid || br.solid)) {
-      return xo = this.level.getBlockEdge(xv + (this.w - 1)) - this.x - this.w;
+      xo = this.level.getBlockEdge(xv + (this.w - 1)) - this.x - this.w;
     }
+    this.x += xo;
+    return this.y += yo;
   };
 
   return Entity;
