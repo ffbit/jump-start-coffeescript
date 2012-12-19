@@ -10,6 +10,9 @@ game =
     @running = false
   start: ->
     @running = true
+
+    # Trying to reach an invalid location
+    console.log @level.getBlock -10, 30
   reset: ->
     @player = new Player
     @level = new Level levels[0], @

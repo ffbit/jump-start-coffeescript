@@ -389,6 +389,14 @@ Level = (function() {
     return [Math.floor(x / gfx.tileW), Math.floor(y / gfx.tileH)];
   };
 
+  Level.prototype.getBlock = function(x, y) {
+    var tile, xBlock, yBlock, _ref;
+    tile = this.getBlockIndex(x, y);
+    xBlock = tile[0];
+    yBlock = tile[1];
+    return ((_ref = this.map[yBlock]) != null ? _ref[xBlock] : void 0) || new Rock();
+  };
+
   return Level;
 
 })();
@@ -415,7 +423,8 @@ game = {
     return this.running = false;
   },
   start: function() {
-    return this.running = true;
+    this.running = true;
+    return console.log(this.level.getBlock(-10, 30));
   },
   reset: function() {
     this.player = new Player;

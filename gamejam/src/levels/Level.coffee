@@ -58,3 +58,8 @@ class Level
       Math.floor x / gfx.tileW
       Math.floor y / gfx.tileH
     ]
+  getBlock: (x, y) ->
+    tile = @getBlockIndex x, y
+    xBlock = tile[0]
+    yBlock = tile[1]
+    @map[yBlock]?[xBlock] or new Rock()
