@@ -406,6 +406,15 @@ Level = (function() {
     return _results;
   };
 
+  Level.prototype.getBlockEdge = function(position, forVertical) {
+    var snapTo;
+    if (forVertical == null) {
+      forVertical = false;
+    }
+    snapTo = forVertical ? gfx.tileH : gfx.tileW;
+    return utils.snap(position, snapTo);
+  };
+
   return Level;
 
 })();
