@@ -88,6 +88,14 @@ document.addEventListener("keyup", function(e) {
 
 Entity = (function() {
 
+  Entity.prototype.x = 0;
+
+  Entity.prototype.y = 0;
+
+  Entity.prototype.w = 18;
+
+  Entity.prototype.h = 24;
+
   Entity.prototype.speed = 4;
 
   Entity.prototype.dir = "LEFT";
