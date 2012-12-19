@@ -16,6 +16,12 @@ class Entity
     xv = @x + xo
     yv = @y + yo
     # 2. Check possible block collisions due to vertical movement
+    [tl, bl, tr, br] = level.getBlocks [
+                          [@x, yv]
+                          [@x, yv + (@h - 1)]
+                          [@x + (@w - 1), yv]
+                          [@x + (@w - 1), yv + (@h - 1)]
+                        ]
     # 3. If collision occurs, move entity back to the edge
     # 4. Check possible block collisions due to horizontal movement
     # 5. If edges overlap, move entity back a little

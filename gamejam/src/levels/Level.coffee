@@ -61,3 +61,5 @@ class Level
   getBlock: (x, y) ->
     [xBlock, yBlock] = @getBlockIndex x, y
     @map[yBlock]?[xBlock] or new Rock()
+  getBlocks: (coords) ->
+    @getBlock x, y for [x, y] in coords

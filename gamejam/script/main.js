@@ -133,11 +133,12 @@ Entity = (function() {
   };
 
   Entity.prototype.move = function(dx, dy) {
-    var xo, xv, yo, yv;
+    var bl, br, tl, tr, xo, xv, yo, yv, _ref;
     xo = dx;
     yo = dy;
     xv = this.x + xo;
-    return yv = this.y + yo;
+    yv = this.y + yo;
+    return _ref = level.getBlocks([[this.x, yv], [this.x, yv + (this.h - 1)], [this.x + (this.w - 1), yv], [this.x + (this.w - 1), yv + (this.h - 1)]]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3], _ref;
   };
 
   return Entity;
@@ -393,6 +394,16 @@ Level = (function() {
     var xBlock, yBlock, _ref, _ref1;
     _ref = this.getBlockIndex(x, y), xBlock = _ref[0], yBlock = _ref[1];
     return ((_ref1 = this.map[yBlock]) != null ? _ref1[xBlock] : void 0) || new Rock();
+  };
+
+  Level.prototype.getBlocks = function(coords) {
+    var x, y, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = coords.length; _i < _len; _i++) {
+      _ref = coords[_i], x = _ref[0], y = _ref[1];
+      _results.push(this.getBlock(x, y));
+    }
+    return _results;
   };
 
   return Level;
