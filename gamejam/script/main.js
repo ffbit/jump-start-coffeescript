@@ -186,18 +186,21 @@ Player = (function(_super) {
   }
 
   Player.prototype.update = function() {
+    var xo, yo;
+    xo = yo = 0;
     if (keys.left) {
-      this.x -= this.speed;
+      xo -= this.speed;
     }
     if (keys.right) {
-      this.x += this.speed;
-    }
-    if (keys.up) {
-      this.y -= this.speed;
+      xo += this.speed;
     }
     if (keys.down) {
-      return this.y += this.speed;
+      yo += this.speed;
     }
+    if (keys.up) {
+      yo -= this.speed;
+    }
+    return this.move(xo, yo);
   };
 
   Player.prototype.render = function(gfx) {
