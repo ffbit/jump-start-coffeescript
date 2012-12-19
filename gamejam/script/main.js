@@ -385,6 +385,10 @@ Level = (function() {
     return _results;
   };
 
+  Level.prototype.getBlockIndex = function(x, y) {
+    return [Math.floor(x / gfx.tileW), Math.floor(y / gfx.tileH)];
+  };
+
   return Level;
 
 })();

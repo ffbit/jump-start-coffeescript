@@ -53,3 +53,8 @@ class Level
         block.render gfx, x * gfx.tileW, y * gfx.tileH
 
     ninja.render gfx for ninja in @ninjas
+  getBlockIndex: (x, y) ->
+    [
+      Math.floor x / gfx.tileW
+      Math.floor y / gfx.tileH
+    ]
