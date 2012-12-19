@@ -138,14 +138,14 @@ Entity = (function() {
     yo = dy;
     xv = this.x + xo;
     yv = this.y + yo;
-    _ref = level.getBlocks([[this.x, yv], [this.x, yv + (this.h - 1)], [this.x + (this.w - 1), yv], [this.x + (this.w - 1), yv + (this.h - 1)]]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3];
-    if (dy < 0 && (tl.solid in tr.solid)) {
+    _ref = this.level.getBlocks([[this.x, yv], [this.x, yv + (this.h - 1)], [this.x + (this.w - 1), yv], [this.x + (this.w - 1), yv + (this.h - 1)]]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3];
+    if (dy < 0 && (tl.solid || tr.solid)) {
       yo = this.level.getBlockEdge(this.y, "VERT") - this.y;
     }
     if (dy > 0 && (bl.solid || br.solid)) {
-      yo = this.level.getBlockEdge(this.y + (this.h - 1), "VERT") - this.y - this.h;
+      yo = this.level.getBlockEdge(yv + (this.h - 1), "VERT") - this.y - this.h;
     }
-    _ref1 = level.getBlocks([[xv, this.y], [xv, this.y + (this.h(-1))], [xv + (this.w - 1), this.y], [xv + (this.w - 1), this.y + (this.h - 1)]]), tl = _ref1[0], bl = _ref1[1], tr = _ref1[2], br = _ref1[3];
+    _ref1 = this.level.getBlocks([[xv, this.y], [xv, this.y + (this.h - 1)], [xv + (this.w - 1), this.y], [xv + (this.w - 1), this.y + (this.h - 1)]]), tl = _ref1[0], bl = _ref1[1], tr = _ref1[2], br = _ref1[3];
     if (dx < 0 && (tl.solid || bl.solid)) {
       xo = this.level.getBlockEdge(this.x) - this.x;
     }
