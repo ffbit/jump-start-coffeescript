@@ -390,11 +390,9 @@ Level = (function() {
   };
 
   Level.prototype.getBlock = function(x, y) {
-    var tile, xBlock, yBlock, _ref;
-    tile = this.getBlockIndex(x, y);
-    xBlock = tile[0];
-    yBlock = tile[1];
-    return ((_ref = this.map[yBlock]) != null ? _ref[xBlock] : void 0) || new Rock();
+    var xBlock, yBlock, _ref, _ref1;
+    _ref = this.getBlockIndex(x, y), xBlock = _ref[0], yBlock = _ref[1];
+    return ((_ref1 = this.map[yBlock]) != null ? _ref1[xBlock] : void 0) || new Rock();
   };
 
   return Level;
