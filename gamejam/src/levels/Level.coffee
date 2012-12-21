@@ -61,7 +61,7 @@ class Level
   getBlock: (x, y) ->
     [xBlock, yBlock] = @getBlockIndex x, y
     @map[yBlock]?[xBlock] or new Rock()
-  getBlocks: (coords) ->
+  getBlocks: (coords...) ->
     @getBlock x, y for [x, y] in coords
   getBlockEdge: (position, forVertical = false) ->
     snapTo = if forVertical then gfx.tileH else gfx.tileW
