@@ -64,9 +64,6 @@ class Entity
                             [@x, @y + @h],
                             [@x + (@w - 1), @y],
                             [@x + (@w - 1), @y + @h])
-    # Make sure we're standing on solid ground
-    unless @falling
-      @falling = !(bl.solid or br.solid)
 
     # Touching ladder logic
     @onLadder = false
@@ -82,3 +79,12 @@ class Entity
         @x = snapAmount + gfx.tileW
       unless (br.climbable or tr.climbable)
         @x = snapAmount
+
+    @onTopOfLadder = @onLadder \
+                        and not (tl.climbable or tr.climbable) \
+                        and (@y + @h) % gfx.tileH is 0
+
+    # Make sure we're standing on solid ground
+    if not @onLadder and not @falling
+      @falling = not (bl.solid or br.solid \
+                        or bl.climbable or br.climbable)

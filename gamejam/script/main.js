@@ -172,9 +172,6 @@ Entity = (function() {
     var bl, br, nearBlocks, snapAmount, tl, touchingALadder, tr, _ref;
     this.wasOnLadder = this.onLadder;
     nearBlocks = (_ref = this.level.getBlocks([this.x, this.y], [this.x, this.y + this.h], [this.x + (this.w - 1), this.y], [this.x + (this.w - 1), this.y + this.h]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3], _ref);
-    if (!this.falling) {
-      this.falling = !(bl.solid || br.solid);
-    }
     this.onLadder = false;
     touchingALadder = nearBlocks.some(function(block) {
       return block.climbable;
@@ -189,8 +186,12 @@ Entity = (function() {
         this.x = snapAmount + gfx.tileW;
       }
       if (!(br.climbable || tr.climbable)) {
-        return this.x = snapAmount;
+        this.x = snapAmount;
       }
+    }
+    this.onTopOfLadder = this.onLadder && !(tl.climbable || tr.climbable) && (this.y + this.h) % gfx.tileH === 0;
+    if (!this.onLadder && !this.falling) {
+      return this.falling = !(bl.solid || br.solid || bl.climbable || br.climbable);
     }
   };
 
@@ -284,25 +285,6 @@ Dirt = (function(_super) {
   };
 
   return Dirt;
-
-})(Block);
-
-Ladder = (function(_super) {
-
-  __extends(Ladder, _super);
-
-  Ladder.prototype.climbable = true;
-
-  function Ladder(top) {
-    this.top = top;
-    this.frame = top ? 6 : 5;
-  }
-
-  Ladder.prototype.render = function(gfx, x, y) {
-    return gfx.drawSprite(this.frame, 0, x, y);
-  };
-
-  return Ladder;
 
 })(Block);
 
@@ -566,3 +548,22 @@ game = {
     return this.player.y = y;
   }
 };
+
+Ladder = (function(_super) {
+
+  __extends(Ladder, _super);
+
+  Ladder.prototype.climbable = true;
+
+  function Ladder(top) {
+    this.top = top;
+    this.frame = top ? 6 : 5;
+  }
+
+  Ladder.prototype.render = function(gfx, x, y) {
+    return gfx.drawSprite(this.frame, 0, x, y);
+  };
+
+  return Ladder;
+
+})(Block);
