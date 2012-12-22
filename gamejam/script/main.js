@@ -260,6 +260,8 @@ Block = (function() {
 
   Block.prototype.climbable = false;
 
+  Block.prototype.touchable = false;
+
   function Block() {}
 
   Block.prototype.update = function() {};
@@ -309,6 +311,10 @@ Rock = (function(_super) {
 Treasure = (function(_super) {
 
   __extends(Treasure, _super);
+
+  Treasure.prototype.touchable = true;
+
+  Treasure.prototype.collected = false;
 
   function Treasure() {
     this.yOff = Math.random() * Math.PI;

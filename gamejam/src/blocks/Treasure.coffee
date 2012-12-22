@@ -1,4 +1,6 @@
 class Treasure extends Block
+  touchable: true
+  collected: false
   constructor: ->
     @yOff = Math.random() * Math.PI
   update: ->
