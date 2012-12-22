@@ -161,7 +161,16 @@ Entity = (function() {
       xo = this.level.getBlockEdge(xv + (this.w - 1)) - this.x - this.w;
     }
     this.x += xo;
-    return this.y += yo;
+    this.y += yo;
+    return this.checkNewPos(dx, dy);
+  };
+
+  Entity.prototype.checkNewPos = function(dx, dy) {
+    var bl, br, nearBlocks, tl, tr, _ref;
+    nearBlocks = (_ref = this.level.getBlocks([this.x, this.y], [this.x, this.y + this.h], [this.x + (this.w - 1), this.y], [this.x + (this.w - 1), this.y + this.h]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3], _ref);
+    if (!this.falling) {
+      return this.falling = !(bl.solid || br.solid);
+    }
   };
 
   return Entity;

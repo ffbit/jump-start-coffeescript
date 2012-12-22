@@ -48,3 +48,16 @@ class Entity
     # 6. Finally, add the allowed movement to the current position
     @x += xo
     @y += yo
+
+    # Check the new position
+    @checkNewPos dx, dy
+  checkNewPos: (dx, dy) ->
+    nearBlocks = \
+      [tl, bl, tr, br] = @level.getBlocks(
+                            [@x, @y],
+                            [@x, @y + @h],
+                            [@x + (@w - 1), @y],
+                            [@x + (@w - 1), @y + @h])
+    # Make sure we're standing on solid ground
+    unless @falling
+      @falling = !(bl.solid or br.solid)
