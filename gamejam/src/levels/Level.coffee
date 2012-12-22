@@ -44,9 +44,9 @@ class Level
     @ninjas.push ninja
   update: ->
     # Update the level blocks
-    for row in @map
-      for block in row
-        block.update()
+    for row, y in @map
+      for block, x in row
+        block.update x, y, @
 
     ninja.update() for ninja in @ninjas
   render: (gfx) ->
@@ -69,3 +69,9 @@ class Level
   getBlockEdge: (position, forVertical = false) ->
     snapTo = if forVertical then gfx.tileH else gfx.tileW
     utils.snap position, snapTo
+  removeBlock: (x, y, block) ->
+    @map[y][x] = new Block()
+    if block.constructor is Treasure
+      if --@treasures is 0
+        alert "Level Complete!"
+        @game.reset()

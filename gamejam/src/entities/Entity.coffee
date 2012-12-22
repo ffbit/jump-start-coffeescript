@@ -65,6 +65,10 @@ class Entity
                             [@x + (@w - 1), @y],
                             [@x + (@w - 1), @y + @h])
 
+    # Collect any touchables
+    block.touch @ for block in nearBlocks \
+                            when block.touchable
+
     # Touching ladder logic
     @onLadder = false
     touchingALadder = nearBlocks.some (block) -> block.climbable

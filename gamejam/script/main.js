@@ -169,9 +169,15 @@ Entity = (function() {
   };
 
   Entity.prototype.checkNewPos = function(dx, dy) {
-    var bl, br, nearBlocks, snapAmount, tl, touchingALadder, tr, _ref;
+    var bl, block, br, nearBlocks, snapAmount, tl, touchingALadder, tr, _i, _len, _ref;
     this.wasOnLadder = this.onLadder;
     nearBlocks = (_ref = this.level.getBlocks([this.x, this.y], [this.x, this.y + this.h], [this.x + (this.w - 1), this.y], [this.x + (this.w - 1), this.y + this.h]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3], _ref);
+    for (_i = 0, _len = nearBlocks.length; _i < _len; _i++) {
+      block = nearBlocks[_i];
+      if (block.touchable) {
+        block.touch(this);
+      }
+    }
     this.onLadder = false;
     touchingALadder = nearBlocks.some(function(block) {
       return block.climbable;
@@ -320,14 +326,21 @@ Treasure = (function(_super) {
     this.yOff = Math.random() * Math.PI;
   }
 
-  Treasure.prototype.update = function() {
-    return this.yOff += Math.PI / 24;
+  Treasure.prototype.update = function(x, y, level) {
+    this.yOff += Math.PI / 24;
+    if (this.collected) {
+      return level.removeBlock(x, y, this);
+    }
   };
 
   Treasure.prototype.render = function(gfx, x, y) {
     var ySine;
     ySine = Math.floor(Math.sin(this.yOff) * 4);
     return gfx.drawSprite(5, 1, x, y + ySine);
+  };
+
+  Treasure.prototype.touch = function(entity) {
+    return this.collected = entity.constructor === Player;
   };
 
   return Treasure;
@@ -424,13 +437,13 @@ Level = (function() {
   };
 
   Level.prototype.update = function() {
-    var block, ninja, row, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
+    var block, ninja, row, x, y, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
     _ref = this.map;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      row = _ref[_i];
-      for (_j = 0, _len1 = row.length; _j < _len1; _j++) {
-        block = row[_j];
-        block.update();
+    for (y = _i = 0, _len = _ref.length; _i < _len; y = ++_i) {
+      row = _ref[y];
+      for (x = _j = 0, _len1 = row.length; _j < _len1; x = ++_j) {
+        block = row[x];
+        block.update(x, y, this);
       }
     }
     _ref1 = this.ninjas;
@@ -489,6 +502,16 @@ Level = (function() {
     }
     snapTo = forVertical ? gfx.tileH : gfx.tileW;
     return utils.snap(position, snapTo);
+  };
+
+  Level.prototype.removeBlock = function(x, y, block) {
+    this.map[y][x] = new Block();
+    if (block.constructor === Treasure) {
+      if (--this.treasures === 0) {
+        alert("Level Complete!");
+        return this.game.reset();
+      }
+    }
   };
 
   return Level;
