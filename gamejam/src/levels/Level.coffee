@@ -18,6 +18,9 @@ class Level
                switch col
                  when "@" then new Dirt()
                  when "O" then new Rock()
+                 when "#" then new Ladder()
+                 # Top of the ladder
+                 when "-" then new Ladder true
                  when "*"
                    @treasures++
                    new Treasure()
