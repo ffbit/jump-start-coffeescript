@@ -127,6 +127,9 @@ Entity = (function() {
     this.y = y;
     this.falling = true;
     this.wasFalling = true;
+    this.onLadder = false;
+    this.wasOnLadder = false;
+    this.onTopOfLadder = false;
   }
 
   Entity.prototype.update = function() {};
@@ -166,10 +169,28 @@ Entity = (function() {
   };
 
   Entity.prototype.checkNewPos = function(dx, dy) {
-    var bl, br, nearBlocks, tl, tr, _ref;
+    var bl, br, nearBlocks, snapAmount, tl, touchingALadder, tr, _ref;
+    this.wasOnLadder = this.onLadder;
     nearBlocks = (_ref = this.level.getBlocks([this.x, this.y], [this.x, this.y + this.h], [this.x + (this.w - 1), this.y], [this.x + (this.w - 1), this.y + this.h]), tl = _ref[0], bl = _ref[1], tr = _ref[2], br = _ref[3], _ref);
     if (!this.falling) {
-      return this.falling = !(bl.solid || br.solid);
+      this.falling = !(bl.solid || br.solid);
+    }
+    this.onLadder = false;
+    touchingALadder = nearBlocks.some(function(block) {
+      return block.climbable;
+    });
+    if (touchingALadder) {
+      this.onLadder = true;
+      this.falling = false;
+    }
+    if (dy !== 0) {
+      snapAmount = utils.snap(this.x, gfx.tileW);
+      if (!(bl.climbable || tl.climbable)) {
+        this.x = snapAmount + gfx.tileW;
+      }
+      if (!(br.climbable || tr.climbable)) {
+        return this.x = snapAmount;
+      }
     }
   };
 

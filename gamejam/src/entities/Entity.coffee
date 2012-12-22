@@ -9,6 +9,10 @@ class Entity
     # Falling flags
     @falling = true
     @wasFalling = true
+    # Ladder flags
+    @onLadder = false
+    @wasOnLadder = false
+    @onTopOfLadder = false
   update: ->
   render: (gfx) ->
     gfx.ctx.fillText "?", @x, @y
@@ -52,6 +56,8 @@ class Entity
     # Check the new position
     @checkNewPos dx, dy
   checkNewPos: (dx, dy) ->
+    @wasOnLadder = @onLadder
+
     nearBlocks = \
       [tl, bl, tr, br] = @level.getBlocks(
                             [@x, @y],
@@ -61,3 +67,18 @@ class Entity
     # Make sure we're standing on solid ground
     unless @falling
       @falling = !(bl.solid or br.solid)
+
+    # Touching ladder logic
+    @onLadder = false
+    touchingALadder = nearBlocks.some (block) -> block.climbable
+    if touchingALadder
+      @onLadder = true
+      @falling = false
+
+    # Snap to ladders if trying to go up or down
+    if dy isnt 0
+      snapAmount = utils.snap @x, gfx.tileW
+      unless (bl.climbable or tl.climbable)
+        @x = snapAmount + gfx.tileW
+      unless (br.climbable or tr.climbable)
+        @x = snapAmount
