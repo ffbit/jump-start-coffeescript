@@ -437,7 +437,7 @@ Level = (function() {
   };
 
   Level.prototype.update = function() {
-    var block, ninja, row, x, y, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
+    var block, ninja, row, x, y, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _results;
     _ref = this.map;
     for (y = _i = 0, _len = _ref.length; _i < _len; y = ++_i) {
       row = _ref[y];
@@ -447,12 +447,24 @@ Level = (function() {
       }
     }
     _ref1 = this.ninjas;
-    _results = [];
     for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
       ninja = _ref1[_k];
-      _results.push(ninja.update());
+      ninja.update();
+    }
+    _ref2 = this.ninjas;
+    _results = [];
+    for (_l = 0, _len3 = _ref2.length; _l < _len3; _l++) {
+      ninja = _ref2[_l];
+      _results.push(this.checkCollision(this.game.player, ninja));
     }
     return _results;
+  };
+
+  Level.prototype.checkCollision = function(player, ninja) {
+    if (player.x + player.w >= ninja.x && player.x <= ninja.x + ninja.w && player.y + player.h >= ninja.y && player.y <= ninja.y + ninja.h) {
+      alert("You are dead");
+      return this.game.reset();
+    }
   };
 
   Level.prototype.render = function(gfx) {

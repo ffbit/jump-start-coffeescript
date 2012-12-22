@@ -49,6 +49,16 @@ class Level
         block.update x, y, @
 
     ninja.update() for ninja in @ninjas
+
+    # @game.player.update()
+    @checkCollision @game.player, ninja for ninja in @ninjas
+  checkCollision: (player, ninja) ->
+    if player.x + player.w >= ninja.x and
+        player.x <= ninja.x + ninja.w and
+        player.y + player.h >= ninja.y and
+        player.y <= ninja.y + ninja.h
+      alert "You are dead"
+      @game.reset()
   render: (gfx) ->
     # Render the level block
     for row, y in @map
