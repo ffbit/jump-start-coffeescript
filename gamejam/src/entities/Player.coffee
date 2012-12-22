@@ -14,8 +14,9 @@ class Player extends Entity
         xo += @speed
         @dir = "RIGHT"
 
-    yo += @speed if keys.down
-    yo -= @speed if keys.up
+    yo += @speed if keys.down and @onLadder
+    yo -= @speed if keys.up and @onLadder \
+                            and not @onTopOfLadder
 
     @move xo, yo
   render: (gfx) ->
