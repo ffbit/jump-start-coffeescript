@@ -205,11 +205,15 @@ Player = (function(_super) {
   Player.prototype.update = function() {
     var xo, yo;
     xo = yo = 0;
-    if (keys.left) {
-      xo -= this.speed;
-    }
-    if (keys.right) {
-      xo += this.speed;
+    if (!this.falling) {
+      if (keys.left) {
+        xo -= this.speed;
+        this.dir = "LEFT";
+      }
+      if (keys.right) {
+        xo += this.speed;
+        this.dir = "RIGHT";
+      }
     }
     if (keys.down) {
       yo += this.speed;
