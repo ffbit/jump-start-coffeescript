@@ -286,7 +286,27 @@ Ninja = (function(_super) {
 
   Ninja.prototype.hunt = function(px, py) {
     var x, y;
-    return x = y = 0;
+    x = y = 0;
+    if (py === this.y || this.onTopOfLadder) {
+      if (px > this.x) {
+        x += this.speed;
+        this.dir = "RIGHT";
+      } else {
+        x -= this.speed;
+        this.dir = "LEFT";
+      }
+    } else if (this.onLadder) {
+      if (!this.onTopOfLadder && py < this.y) {
+        y -= this.speed;
+      }
+      if (py > this.y) {
+        y += this.speed;
+      }
+    } else {
+      this.state = "CRUISING";
+      this.subState = "LEFT";
+    }
+    return [x, y];
   };
 
   return Ninja;
