@@ -209,12 +209,30 @@ Ninja = (function(_super) {
 
   __extends(Ninja, _super);
 
-  function Ninja() {
-    return Ninja.__super__.constructor.apply(this, arguments);
+  Ninja.prototype.speed = 3;
+
+  Ninja.prototype.state = "CRUISING";
+
+  Ninja.prototype.subState = "IDLE";
+
+  function Ninja(level, x, y, player) {
+    this.player = player;
+    Ninja.__super__.constructor.call(this, level, x, y);
   }
 
   Ninja.prototype.render = function() {
     return gfx.drawSprite(0, 1, this.x, this.y);
+  };
+
+  Ninja.prototype.cruise = function(px, py) {
+    var x, y;
+    x = y = 0;
+    return [x, y];
+  };
+
+  Ninja.prototype.hunt = function(px, py) {
+    var x, y;
+    return x = y = 0;
   };
 
   return Ninja;
