@@ -211,6 +211,8 @@ Ninja = (function(_super) {
 
   Ninja.prototype.speed = 3;
 
+  Ninja.prototype.time = 0;
+
   Ninja.prototype.state = "CRUISING";
 
   Ninja.prototype.subState = "IDLE";
@@ -224,9 +226,58 @@ Ninja = (function(_super) {
     return gfx.drawSprite(0, 1, this.x, this.y);
   };
 
+  Ninja.prototype.update = function() {
+    var px, py, xo, yo, _ref;
+    _ref = (function() {
+      var _ref;
+      if (this.falling) {
+        return [0, 0];
+      } else {
+        _ref = this.player, px = _ref.x, py = _ref.y;
+        switch (this.state) {
+          case "CRUISING":
+            return this.cruise(px, py);
+          case "HUNTING":
+            return this.hunt(px, py);
+        }
+      }
+    }).call(this), xo = _ref[0], yo = _ref[1];
+    return this.move(xo, yo);
+  };
+
   Ninja.prototype.cruise = function(px, py) {
-    var x, y;
+    var newMode, x, y;
     x = y = 0;
+    switch (this.subState) {
+      case "RIGHT":
+        x += this.speed;
+        this.dir = "RIGHT";
+        break;
+      case "LEFT":
+        x -= this.speed;
+        this.dir = "LEFT";
+    }
+    if (--this.time < 0) {
+      newMode = utils.rand(5);
+      this.time = utils.rand(20, 40);
+      this.subState = (function() {
+        switch (newMode) {
+          case 1:
+          case 0:
+            return "LEFT";
+          case 2:
+          case 3:
+            return "RIGHT";
+          default:
+            return "IDLE";
+        }
+      })();
+    }
+    if (this.onLadder && !this.wasOnLadder) {
+      if (py = this.y) {
+        this.state = "HUNTING";
+      }
+    }
     return [x, y];
   };
 
@@ -450,7 +501,7 @@ Level = (function() {
     var ninja, xPos, yPos;
     xPos = x * gfx.tileW;
     yPos = y * gfx.tileH;
-    ninja = new Ninja(this, xPos, yPos);
+    ninja = new Ninja(this, xPos, yPos, this.game.player);
     return this.ninjas.push(ninja);
   };
 
