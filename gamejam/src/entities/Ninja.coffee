@@ -39,7 +39,7 @@ class Ninja extends Entity
     if @onLadder and not @wasOnLadder
       @state = "HUNTING" if Math.random() < 0.5
     
-    @state = "HUNTING" if py = @y
+    @state = "HUNTING" if py == @y
 
     [x, y]
   hunt: (px, py) ->

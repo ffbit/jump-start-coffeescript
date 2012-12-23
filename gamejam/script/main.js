@@ -278,7 +278,7 @@ Ninja = (function(_super) {
         this.state = "HUNTING";
       }
     }
-    if (py = this.y) {
+    if (py === this.y) {
       this.state = "HUNTING";
     }
     return [x, y];
