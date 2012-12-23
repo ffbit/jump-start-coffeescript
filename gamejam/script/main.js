@@ -274,9 +274,12 @@ Ninja = (function(_super) {
       })();
     }
     if (this.onLadder && !this.wasOnLadder) {
-      if (py = this.y) {
+      if (Math.random() < 0.5) {
         this.state = "HUNTING";
       }
+    }
+    if (py = this.y) {
+      this.state = "HUNTING";
     }
     return [x, y];
   };
