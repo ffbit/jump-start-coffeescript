@@ -317,6 +317,8 @@ Player = (function(_super) {
 
   __extends(Player, _super);
 
+  Player.prototype.lastDig = utils.now();
+
   function Player() {
     Player.__super__.constructor.apply(this, arguments);
     this.dir = "RIGHT";
@@ -341,11 +343,24 @@ Player = (function(_super) {
     if (keys.up && this.onLadder && !this.onTopOfLadder) {
       yo -= this.speed;
     }
+    if (keys.space) {
+      this.dig();
+    }
     return this.move(xo, yo);
   };
 
   Player.prototype.render = function(gfx) {
     return gfx.drawSprite(0, 0, this.x, this.y);
+  };
+
+  Player.prototype.dig = function() {
+    var delay;
+    delay = 6 * 1000;
+    if (utils.now() - this.lastDig < delay) {
+      return;
+    }
+    this.level.digAt(this.dir, this.x, this.y);
+    return this.lastDig = utils.now();
   };
 
   return Player;
@@ -616,6 +631,16 @@ Level = (function() {
         return this.game.reset();
       }
     }
+  };
+
+  Level.prototype.digAt = function(dir, x, y) {
+    var block, xb, yb, _ref;
+    _ref = this.getBlockIndex(x, y), xb = _ref[0], yb = _ref[1];
+    xb = xb + (dir === "RIGHT" ? 1 : -1);
+    if (yb + 1 > this.h || xb < 0 || xb > this.w - 1) {
+      return;
+    }
+    return block = this.map[yb + 1][xb];
   };
 
   return Level;

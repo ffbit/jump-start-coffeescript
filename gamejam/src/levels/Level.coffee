@@ -85,3 +85,11 @@ class Level
       if --@treasures is 0
         alert "Level Complete!"
         @game.reset()
+  digAt: (dir, x, y) ->
+    [xb, yb] = @getBlockIndex x, y
+
+    xb = xb + if dir == "RIGHT" then 1 else -1
+    return if yb + 1 > @h or xb < 0 or xb > @w - 1
+    block = @map[yb + 1][xb]
+
+    # Dig the block!
