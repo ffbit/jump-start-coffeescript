@@ -29,7 +29,7 @@ gfx = {
   tileH: 24,
   init: function() {
     var canvas;
-    canvas = document.querySelector("#game");
+    canvas = $("#game")[0];
     this.ctx = canvas != null ? typeof canvas.getContext === "function" ? canvas.getContext("2d") : void 0 : void 0;
     if (!this.ctx) {
       return false;

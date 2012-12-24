@@ -2,7 +2,7 @@ gfx =
   tileW: 24
   tileH: 24
   init: ->
-    canvas = document.querySelector "#game"
+    canvas = $("#game")[0]
     @ctx = canvas?.getContext? "2d"
     return false unless @ctx
     @w = canvas.width
