@@ -88,9 +88,6 @@ keys = {
         this.down = isDown;
         break;
       case 32:
-        if (isDown) {
-          console.log("Fire away!");
-        }
         this.space = isDown;
     }
     if (isDown) {
@@ -396,10 +393,44 @@ Dirt = (function(_super) {
   Dirt.prototype.solid = true;
 
   Dirt.prototype.render = function(gfx, x, y) {
-    return gfx.drawSprite(4, 1, x, y);
+    var oldAlpha;
+    oldAlpha = gfx.ctx.globalAlpha;
+    gfx.ctx.globalAlpha = 1 - this.digTime / 80;
+    gfx.drawSprite(4, 1, x, y);
+    return gfx.ctx.globalAlpha = oldAlpha;
+  };
+
+  Dirt.prototype.digIt = function() {
+    this.digTime = 80;
+    return this.solid = false;
+  };
+
+  Dirt.prototype.update = function() {
+    if (--this.digTime === 50) {
+      return this.solid = true;
+    }
   };
 
   return Dirt;
+
+})(Block);
+
+Ladder = (function(_super) {
+
+  __extends(Ladder, _super);
+
+  Ladder.prototype.climbable = true;
+
+  function Ladder(top) {
+    this.top = top;
+    this.frame = top ? 6 : 5;
+  }
+
+  Ladder.prototype.render = function(gfx, x, y) {
+    return gfx.drawSprite(this.frame, 0, x, y);
+  };
+
+  return Ladder;
 
 })(Block);
 
@@ -640,7 +671,10 @@ Level = (function() {
     if (yb + 1 > this.h || xb < 0 || xb > this.w - 1) {
       return;
     }
-    return block = this.map[yb + 1][xb];
+    block = this.map[yb + 1][xb];
+    if (block.digIt != null) {
+      return block.digIt();
+    }
   };
 
   return Level;
@@ -706,22 +740,3 @@ game = {
     return this.player.y = y;
   }
 };
-
-Ladder = (function(_super) {
-
-  __extends(Ladder, _super);
-
-  Ladder.prototype.climbable = true;
-
-  function Ladder(top) {
-    this.top = top;
-    this.frame = top ? 6 : 5;
-  }
-
-  Ladder.prototype.render = function(gfx, x, y) {
-    return gfx.drawSprite(this.frame, 0, x, y);
-  };
-
-  return Ladder;
-
-})(Block);

@@ -93,3 +93,4 @@ class Level
     block = @map[yb + 1][xb]
 
     # Dig the block!
+    block.digIt() if block.digIt?

@@ -16,7 +16,7 @@ keys =
       when 38 then @up    = isDown
       when 40 then @down  = isDown
       when 32
-        console.log "Fire away!" if isDown
+        # console.log "Fire away!" if isDown
         @space = isDown
 
     console.log keyCode if isDown
