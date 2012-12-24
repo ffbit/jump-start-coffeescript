@@ -21,10 +21,8 @@ keys =
 
     console.log keyCode if isDown
 
-document.addEventListener "keydown", (e) ->
+$(document).keydown (e) ->
   keys.trigger e.keyCode, true
-, false
 
-document.addEventListener "keyup", (e) ->
+$(document).keyup (e) ->
   keys.trigger e.keyCode, false
-, false
