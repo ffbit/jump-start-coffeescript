@@ -25,7 +25,8 @@ game =
     gfx.clear()
     @update()
     @render()
-    setTimeout (-> game.tick()), 33
+    self = @
+    setTimeout (-> self.tick()), 33
   update: ->
     @level.update()
     @player.update()
