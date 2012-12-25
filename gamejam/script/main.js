@@ -767,9 +767,15 @@ game = {
     return this.player.update();
   },
   render: function() {
-    gfx.ctx.rotate(0.1);
+    var leftEdge, offx;
+    gfx.ctx.save();
+    gfx.ctx.scale(1.3, 1.3);
+    leftEdge = 210;
+    offx = this.player.x > leftEdge ? -this.player.x + leftEdge : 0;
+    gfx.ctx.translate(offx, -this.player.y + 130);
     this.level.render(gfx);
-    return this.player.render(gfx);
+    this.player.render(gfx);
+    return gfx.ctx.restore();
   },
   setPlayer: function(x, y, level) {
     this.player.level = level;

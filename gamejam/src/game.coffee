@@ -31,15 +31,19 @@ game =
     @level.update()
     @player.update()
   render: ->
-    # gfx.ctx.save()
+    gfx.ctx.save()
     # Do some tricks
-    gfx.ctx.rotate 0.1
+    gfx.ctx.scale 1.3, 1.3
+    leftEdge = 210
+    offx = if @player.x > leftEdge \
+             then - @player.x + leftEdge else 0
+    gfx.ctx.translate offx, -@player.y + 130
 
     # Render the game
     @level.render gfx
     @player.render gfx
 
-    # gfx.ctx.restore()
+    gfx.ctx.restore()
 
     # backX = 1 - (@player.x / gfx.w) * 100
     # backY = 1 - (@player.y / gfx.h) * 100
