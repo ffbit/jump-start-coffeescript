@@ -767,12 +767,9 @@ game = {
     return this.player.update();
   },
   render: function() {
-    var backX, backY;
+    gfx.ctx.rotate(0.1);
     this.level.render(gfx);
-    this.player.render(gfx);
-    backX = 1 - (this.player.x / gfx.w) * 100;
-    backY = 1 - (this.player.y / gfx.h) * 100;
-    return gfx.ctx.canvas.style.backgroundPosition = "" + backX + "px " + backY + "px";
+    return this.player.render(gfx);
   },
   setPlayer: function(x, y, level) {
     this.player.level = level;
