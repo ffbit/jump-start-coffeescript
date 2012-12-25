@@ -26,7 +26,7 @@ game =
     @update()
     @render()
     self = @
-    setTimeout (-> self.tick()), 33
+    setTimeout (=> @tick()), 33
   update: ->
     @level.update()
     @player.update()

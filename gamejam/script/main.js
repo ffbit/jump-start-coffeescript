@@ -749,7 +749,8 @@ game = {
     }
   },
   tick: function() {
-    var self;
+    var self,
+      _this = this;
     if (!this.running) {
       return;
     }
@@ -758,7 +759,7 @@ game = {
     this.render();
     self = this;
     return setTimeout((function() {
-      return self.tick();
+      return _this.tick();
     }), 33);
   },
   update: function() {
