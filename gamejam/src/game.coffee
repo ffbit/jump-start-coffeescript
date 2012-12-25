@@ -33,6 +33,10 @@ game =
   render: ->
     @level.render gfx
     @player.render gfx
+
+    backX = 1 - (@player.x / gfx.w) * 100
+    backY = 1 - (@player.y / gfx.h) * 100
+    gfx.ctx.canvas.style.backgroundPosition = "#{backX}px #{backY}px"
   setPlayer: (x, y, level) ->
     @player.level = level
     @player.x = x
