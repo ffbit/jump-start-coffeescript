@@ -23,10 +23,17 @@ class Player extends Entity
 
     @move xo, yo
   render: (gfx) ->
-    fx = if @dir is "LEFT" then 2 else 0
-    fx += utils.counter 2 if keys.left or keys.right
+    fy = fx = 0
+    isLeft = @dir is "LEFT"
+    
+    if @falling 
+      fx = 1 if isLeft
+      fy = 2
+    else
+      fx = 2 if isLeft 
+      fx += utils.counter 2 if keys.left or keys.right
 
-    gfx.drawSprite fx, 0, @x, @y
+    gfx.drawSprite fx, fy, @x, @y
   dig: ->
     # 6 seconds
     delay = 6 * 1000

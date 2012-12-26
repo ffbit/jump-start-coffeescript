@@ -383,12 +383,23 @@ Player = (function(_super) {
   };
 
   Player.prototype.render = function(gfx) {
-    var fx;
-    fx = this.dir === "LEFT" ? 2 : 0;
-    if (keys.left || keys.right) {
-      fx += utils.counter(2);
+    var fx, fy, isLeft;
+    fy = fx = 0;
+    isLeft = this.dir === "LEFT";
+    if (this.falling) {
+      if (isLeft) {
+        fx = 1;
+      }
+      fy = 2;
+    } else {
+      if (isLeft) {
+        fx = 2;
+      }
+      if (keys.left || keys.right) {
+        fx += utils.counter(2);
+      }
     }
-    return gfx.drawSprite(fx, 0, this.x, this.y);
+    return gfx.drawSprite(fx, fy, this.x, this.y);
   };
 
   Player.prototype.dig = function() {
