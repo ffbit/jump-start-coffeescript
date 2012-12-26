@@ -792,9 +792,50 @@ GameScreen = (function(_super) {
 
   __extends(GameScreen, _super);
 
+  GameScreen.prototype.levelNumber = 0;
+
   function GameScreen() {
-    return GameScreen.__super__.constructor.apply(this, arguments);
+    this.player = new Player();
+    this.startLevel();
   }
+
+  GameScreen.prototype.setPlayer = function(x, y, level) {
+    this.player.level = level;
+    this.player.x = x;
+    return this.player.y = y;
+  };
+
+  GameScreen.prototype.update = function() {
+    this.level.update();
+    return this.player.update();
+  };
+
+  GameScreen.prototype.startLevel = function() {
+    return this.level = new Level(levels[this.levelNumber], this);
+  };
+
+  GameScreen.prototype.levelComplete = function() {
+    if (++this.levelNumber >= levels.length) {
+      return game.win();
+    } else {
+      return this.startLevel();
+    }
+  };
+
+  GameScreen.prototype.render = function(gfx) {
+    var backX, backY, leftEdge, offx;
+    gfx.ctx.save();
+    gfx.ctx.scale(1.3, 1.3);
+    leftEdge = 210;
+    offx = this.player.x > leftEdge ? -this.player.x + leftEdge : 0;
+    gfx.ctx.translate(offx, -this.player.y + 130);
+    this.level.render(gfx);
+    this.player.render(gfx);
+    gfx.ctx.restore();
+    backX = 1 - (this.player.x / gfx.w) * 100;
+    backY = 1 - (this.player.y / gfx.h) * 100;
+    return gfx.ctx.canvas.style.backgroundPosition = "" + backX + "px " + backY + "px";
+  };
 
   return GameScreen;
 
