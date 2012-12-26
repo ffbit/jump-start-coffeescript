@@ -25,7 +25,7 @@ class Player extends Entity
   render: (gfx) ->
     fy = fx = 0
     isLeft = @dir is "LEFT"
-    
+
     if @falling 
       fx = 1 if isLeft
       fy = 2

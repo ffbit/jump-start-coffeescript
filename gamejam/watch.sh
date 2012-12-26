@@ -9,4 +9,5 @@ xargs coffee -w -b -j script/main.js \
                 src/entities/
                 src/blocks/
                 src/levels/
+                src/screens/
                 src/game.coffee

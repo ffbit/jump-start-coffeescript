@@ -15,6 +15,9 @@ gfx =
     @sprites.src = "resources/sprites.png"
     @sprites.onload = ->
       onload()
+
+    @title = new Image()
+    @title.src = "resources/title.png"
   drawSprite: (col, row, x, y, w = 1, h = 1, scale = 1) ->
     w *= @tileW
     h *= @tileH
