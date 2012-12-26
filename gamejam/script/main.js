@@ -19,10 +19,12 @@ utils = {
     }
     range = max - min;
     return Math.floor((Math.random()) * range + min);
+  },
+  counter: function(max, speed) {
+    this.speed = speed != null ? speed : 100;
+    return Math.floor(this.now() / speed % max);
   }
 };
-
-console.log(utils.now());
 
 sound = {
   audio: {},
@@ -376,7 +378,9 @@ Player = (function(_super) {
   };
 
   Player.prototype.render = function(gfx) {
-    return gfx.drawSprite(0, 0, this.x, this.y);
+    var fx;
+    fx = this.dir === "LEFT" ? 2 : 0;
+    return gfx.drawSprite(fx, 0, this.x, this.y);
   };
 
   Player.prototype.dig = function() {
