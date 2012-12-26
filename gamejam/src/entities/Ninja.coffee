@@ -6,7 +6,10 @@ class Ninja extends Entity
   constructor: (level, x, y, @player) ->
     super level, x, y
   render: ->
-    gfx.drawSprite 0, 1, @x, @y
+    fx = if @dir is "LEFT" then 2 else 0
+    # fx += utils.counter 2
+
+    gfx.drawSprite fx, 1, @x, @y
   update: ->
     [xo, yo] = if @falling then [0, 0] else 
       {x: px, y: py} = @player
