@@ -8,6 +8,7 @@ class Treasure extends Block
 
     if @collected
       level.removeBlock x, y, @
+      sound.play "particle"
   render: (gfx, x, y) ->
     ySine = Math.floor Math.sin(@yOff) * 4
     gfx.drawSprite 5, 1, x, y + ySine

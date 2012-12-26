@@ -526,7 +526,8 @@ Treasure = (function(_super) {
   Treasure.prototype.update = function(x, y, level) {
     this.yOff += Math.PI / 24;
     if (this.collected) {
-      return level.removeBlock(x, y, this);
+      level.removeBlock(x, y, this);
+      return sound.play("particle");
     }
   };
 
