@@ -24,7 +24,7 @@ class Player extends Entity
     @move xo, yo
   render: (gfx) ->
     fx = if @dir is "LEFT" then 2 else 0
-    # fx += utils.counter 2 if keys.left or keys.right
+    fx += utils.counter 2 if keys.left or keys.right
 
     gfx.drawSprite fx, 0, @x, @y
   dig: ->

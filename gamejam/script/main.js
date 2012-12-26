@@ -21,7 +21,9 @@ utils = {
     return Math.floor((Math.random()) * range + min);
   },
   counter: function(max, speed) {
-    this.speed = speed != null ? speed : 100;
+    if (speed == null) {
+      speed = 100;
+    }
     return Math.floor(this.now() / speed % max);
   }
 };
@@ -253,6 +255,7 @@ Ninja = (function(_super) {
   Ninja.prototype.render = function() {
     var fx;
     fx = this.dir === "LEFT" ? 2 : 0;
+    fx += utils.counter(2);
     return gfx.drawSprite(fx, 1, this.x, this.y);
   };
 
@@ -382,6 +385,9 @@ Player = (function(_super) {
   Player.prototype.render = function(gfx) {
     var fx;
     fx = this.dir === "LEFT" ? 2 : 0;
+    if (keys.left || keys.right) {
+      fx += utils.counter(2);
+    }
     return gfx.drawSprite(fx, 0, this.x, this.y);
   };
 

@@ -8,5 +8,5 @@ utils =
       min = 0
     range = max - min
     Math.floor (Math.random()) * range + min
-  counter: (max, @speed = 100) ->
+  counter: (max, speed = 100) ->
     Math.floor @now() / speed % max

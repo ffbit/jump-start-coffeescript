@@ -7,7 +7,7 @@ class Ninja extends Entity
     super level, x, y
   render: ->
     fx = if @dir is "LEFT" then 2 else 0
-    # fx += utils.counter 2
+    fx += utils.counter 2
 
     gfx.drawSprite fx, 1, @x, @y
   update: ->
