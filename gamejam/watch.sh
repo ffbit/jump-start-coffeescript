@@ -10,4 +10,5 @@ xargs coffee -w -b -j script/main.js \
                 src/blocks/
                 src/levels/
                 src/screens/
+                src/dialogs/
                 src/game.coffee

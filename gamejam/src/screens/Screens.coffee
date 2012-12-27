@@ -24,6 +24,7 @@ class GameScreen extends Screen
 
   startLevel: ->
     @level = new Level levels[@levelNumber], @
+    game.dialog = new LevelDialog(levels[@levelNumber].name)
 
   levelComplete: ->
     if ++@levelNumber >= levels.length
