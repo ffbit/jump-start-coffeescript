@@ -57,8 +57,8 @@ class Level
         player.x <= ninja.x + ninja.w and
         player.y + player.h >= ninja.y and
         player.y <= ninja.y + ninja.h
-      alert "You are dead"
-      @game.reset()
+      sound.play "dead"
+      game.dialog = new DeadDialog()
   render: (gfx) ->
     # Render the level block
     for row, y in @map
