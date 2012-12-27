@@ -3,6 +3,7 @@ class Level
   h: 0
   treasures: 0
   ninjas: []
+  particles: []
   constructor: (level, @game) ->
     @load level
   load: (level) ->
@@ -52,6 +53,7 @@ class Level
 
     # @game.player.update()
     @checkCollision @game.player, ninja for ninja in @ninjas
+    @particles = (p for p in @particles when p.update())
   checkCollision: (player, ninja) ->
     if player.x + player.w >= ninja.x and
         player.x <= ninja.x + ninja.w and
@@ -66,6 +68,7 @@ class Level
         block.render gfx, x * gfx.tileW, y * gfx.tileH
 
     ninja.render gfx for ninja in @ninjas
+    p.render gfx for p in @particles
   getBlockIndex: (x, y) ->
     [
       Math.floor x / gfx.tileW
@@ -96,3 +99,8 @@ class Level
 
     # Building
     @map[yb + 1][xb] = new Gravel() if block.constructor is Block
+
+    @addParticles xb * gfx.tileW, (yb + 1) * gfx.tileH
+    sound.play "dig"
+  addParticles: (x, y) ->
+    @particles.push new Particles x, y

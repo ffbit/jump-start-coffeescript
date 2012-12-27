@@ -8,6 +8,7 @@ xargs coffee -w -b -j script/main.js \
                 src/keys.coffee
                 src/entities/
                 src/blocks/
+                src/particles/
                 src/levels/
                 src/screens/
                 src/dialogs/
