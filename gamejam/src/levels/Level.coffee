@@ -83,8 +83,7 @@ class Level
     @map[y][x] = new Block()
     if block.constructor is Treasure
       if --@treasures is 0
-        alert "Level Complete!"
-        @game.reset()
+        game.dialog = new WinDialog()
   digAt: (dir, x, y) ->
     [xb, yb] = @getBlockIndex x, y
 
